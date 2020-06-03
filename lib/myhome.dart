@@ -1,3 +1,4 @@
+import 'package:boothAlgorithm/screens/about.dart';
 import 'package:boothAlgorithm/screens/solution.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_admob/firebase_admob.dart';
@@ -15,6 +16,16 @@ class MyHome extends StatelessWidget {
       title: Text("Booth Algorithm"),
       centerTitle: true,
       elevation: 0,
+      actions: <Widget>[
+        IconButton(icon:Icon(Icons.info),onPressed: (){
+          Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                         About()),
+                                );
+        },)
+      ],
     );
     final height =
         MediaQuery.of(context).size.height - appBar.preferredSize.height;
