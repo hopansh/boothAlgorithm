@@ -1,3 +1,5 @@
+import 'package:boothAlgorithm/functions/result.dart';
+
 boothAlgo(int m, int q) {
   print("\n\nResult :  $m  * $q  + ${m*q}");
   multiply(3, 4);
@@ -41,15 +43,74 @@ multiply(int n1, int n2) {
 
 binary(final int n) {
   var bin = new List(4);
-  int ctr = 3;
-  int num = n;
+  bin.fillRange(0, 4,0);
+  var binary = n.toSigned( n<0 ? n.bitLength : n.bitLength + 1).toRadixString(2).split('').reversed.toList();
+  binary.asMap().forEach((index,value) => bin[index] = value);
 
-  if (n < 0) num = 16 + n;
-  while (num != 0) {
-    bin[ctr--] = num % 2;
-    num = num ~/ 2;
+  print("Hi");
+  List<int> meh = bin.reversed.toList().map((e) => e == '-' ? 0 : int.parse(e.toString())).toList();
+  print(bin.toList());
+  return meh;
+}
+
+mult(int a, int b){
+
+  List<int> m = binary(a);
+  List<int> q = binary(b);
+  var m2s = m.map((e) => e == 0? 1 : 0).toList();
+  m2s = add(m2s,[0,0,0,1]);
+  List operation = List();
+  operation
+      ..insertAll(0, [0,0,0,0])
+      ..insertAll(4, q)
+      ..insert(8, 0);
+  int count = 4;
+  List<Result> result = List<Result>();
+  while(count > 0){
+    String ops = '';
+    print("count = $count");
+    var q0 = operation[7];
+    var q1 = operation[8]; //means q(-1) but who wants to write long variable names
+    if(q0.toString() == 1.toString() && q1.toString() == 0.toString()){
+      operation = add(operation,m2s);
+      ops = ("Sub");
+      print(operation);
+    }
+    else if(q0 == 0 && q1 == 1){
+      operation = add(operation,m);
+      ops = ("Add");
+      print(operation);
+    }
+    else{
+      ops = ("No add/sub");
+    }
+
+    operation.insert(0, operation[0]);
+    operation.removeLast();
+    print(operation);
+
+    try{
+      String meh = operation.join('');
+      result.add(Result(
+          A: meh.substring(0,4),
+          Q: meh.substring(4,8),
+          Q_1: meh.substring(8),
+          operation: ops,
+          cycle: 4 - count
+      ));
+    }catch(e){
+      print(e.toString());
+    }
+
+
+    count--;
   }
-  return bin;
+  result.forEach((element) {element.toString();});
+
+  Result.M = m.join('');
+  Result.M2s = m2s.join('');
+
+  return result;
 }
 
 display(List p, final int ch, String op) {
@@ -67,12 +128,24 @@ display(List p, final int ch, String op) {
 
 add(List a, List b) {
   int carry = 0;
-  for (int i = 8; i >= 0; i--) {
+  for (int i = 3; i >= 0; i--) {
     final int temp = a[i] + b[i] + carry;
     a[i] = temp % 2;
     carry = temp ~/ 2;
   }
+  return a;
 }
+
+//add(List a,List b){
+//  int carry = 0;
+//  for(int i = 3; i>=0; --i){
+//    a[i] = a[i] + b[i] + carry;
+//    carry = a[i] ~/ 2;
+//    a[i] = a[i] == 2 ? 0 : a[i];
+//    print(a);
+//  }
+//  return a;
+//}
 
 getDecimal(List b) {
   int p = 0;

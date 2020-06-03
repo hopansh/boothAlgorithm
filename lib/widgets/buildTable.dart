@@ -1,8 +1,9 @@
 import 'package:boothAlgorithm/functions/boothAlgo.dart';
+import 'package:boothAlgorithm/functions/result.dart';
 import 'package:flutter/material.dart';
 class BuildTable extends StatelessWidget {
-  final String binqval,binmval;
-  BuildTable(this.binqval,this.binmval);
+  final Result _result;
+  BuildTable(this._result);
   @override
   Widget build(BuildContext context) {
     return Table(children:[
@@ -17,12 +18,12 @@ class BuildTable extends StatelessWidget {
       ]
       ),
       TableRow(children:[
-            Text("0000",style: TextStyle(color:Colors.white),),
-            Text("$binqval",style: TextStyle(color:Colors.white),),
-            Text("0000",style: TextStyle(color:Colors.white),),
-            Text("$binmval",style: TextStyle(color:Colors.white),),
-            Text("Initial Values",style: TextStyle(color:Colors.white),),
-            Text("-",style: TextStyle(color:Colors.white),),
+            Text(_result.A,style: TextStyle(color:Colors.white),),
+            Text(_result.Q,style: TextStyle(color:Colors.white),),
+            Text(_result.Q_1,style: TextStyle(color:Colors.white),),
+            Text(Result.M,style: TextStyle(color:Colors.white),),
+            Text(_result.operation,style: TextStyle(color:Colors.white),),
+            Text(_result.cycle.toString(),style: TextStyle(color:Colors.white),),
       ]),
        
     ],);
