@@ -1,12 +1,17 @@
 import 'package:boothAlgorithm/screens/solution.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 
 class MyHome extends StatelessWidget {
-
-final GlobalKey<FormState>_formKey= GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final appBar = AppBar(
+
+    FirebaseAdMob.instance.initialize(appId: "ca-app-pub-9302800870253054~5146277755" ).then((response){
+       myBanner..load()..show();
+       });
+
+   final appBar = AppBar(
       title: Text("Booth Algorithm"),
       centerTitle: true,
       elevation: 0,
@@ -14,7 +19,7 @@ final GlobalKey<FormState>_formKey= GlobalKey<FormState>();
     final height =
         MediaQuery.of(context).size.height - appBar.preferredSize.height;
     final width = MediaQuery.of(context).size.width;
-    int mval,qval;
+    int mval, qval;
     return Scaffold(
       appBar: appBar,
       body: Container(
@@ -30,22 +35,22 @@ final GlobalKey<FormState>_formKey= GlobalKey<FormState>();
                 margin: EdgeInsets.symmetric(horizontal: 8),
                 color: Color(0xff262626),
                 child: Form(
-                  key:_formKey,
-                                  child: Column(
+                  key: _formKey,
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              
                     children: <Widget>[
                       Container(
                           width: width - 36,
                           child: Text(
                             "Multiplier(Q)",
                             style: TextStyle(
-                                color: Colors.white, fontWeight: FontWeight.bold),
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
                             textAlign: TextAlign.left,
                           )),
                       TextFormField(
                         keyboardType: TextInputType.number,
-                        style: TextStyle(color:Colors.white),
+                        style: TextStyle(color: Colors.white),
                         decoration: const InputDecoration(
                           hintText: 'Enter in Decimal',
                           hoverColor: Colors.white,
@@ -53,14 +58,13 @@ final GlobalKey<FormState>_formKey= GlobalKey<FormState>();
                           focusColor: Colors.white10,
                         ),
                         validator: (value) {
-                          if(value.isEmpty){
+                          if (value.isEmpty) {
                             return "Please Enter a value";
                           }
                         },
                         onSaved: (value) {
-                          qval=int.parse(value);
+                          qval = int.parse(value);
                         },
-                        
                       ),
                       SizedBox(
                         height: 10,
@@ -70,23 +74,24 @@ final GlobalKey<FormState>_formKey= GlobalKey<FormState>();
                           child: Text(
                             "Multiplicand(M)",
                             style: TextStyle(
-                                color: Colors.white, fontWeight: FontWeight.bold),
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
                             textAlign: TextAlign.left,
                           )),
                       TextFormField(
-                         onSaved: (value) {
-                          mval=int.parse(value);
+                        onSaved: (value) {
+                          mval = int.parse(value);
                         },
-                        style: TextStyle(color:Colors.white),
+                        style: TextStyle(color: Colors.white),
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
                           hintText: 'Enter in Decimal',
-                               hoverColor: Colors.white,
-                                  fillColor: Colors.white70,
+                          hoverColor: Colors.white,
+                          fillColor: Colors.white70,
                           focusColor: Colors.white70,
                         ),
                         validator: (value) {
-                          if(value.isEmpty){
+                          if (value.isEmpty) {
                             return "Please Enter a value";
                           }
                         },
@@ -94,15 +99,18 @@ final GlobalKey<FormState>_formKey= GlobalKey<FormState>();
                       Center(
                           heightFactor: 1.3,
                           child: FloatingActionButton.extended(
-                              onPressed:() { 
-                                if(!_formKey.currentState.validate()){
+                              onPressed: () {
+                                if (!_formKey.currentState.validate()) {
                                   return;
                                 }
                                 _formKey.currentState.save();
                                 Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Solution(height,qval,mval)),
-                  );},
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          Solution(height, qval, mval)),
+                                );
+                              },
                               backgroundColor: Colors.black,
                               label: Text("Multiply",
                                   style: TextStyle(
@@ -111,10 +119,29 @@ final GlobalKey<FormState>_formKey= GlobalKey<FormState>();
                     ],
                   ),
                 )),
-           
           ],
         ),
       ),
     );
   }
+
+  
 }
+MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+  keywords: <String>['Maths', 'calculator','booth','boothalgorithm'],
+  contentUrl: 'https://flutter.io',
+  childDirected: false,
+  testDevices: <String>[], // Android emulators are considered test devices
+);
+
+BannerAd myBanner = BannerAd(
+  // Replace the testAdUnitId with an ad unit id from the AdMob dash.
+  // https://developers.google.com/admob/android/test-ads
+  // https://developers.google.com/admob/ios/test-ads
+  adUnitId: BannerAd.testAdUnitId,
+  size: AdSize.smartBanner,
+  targetingInfo: targetingInfo,
+  listener: (MobileAdEvent event) {
+    print("BannerAd event is $event");
+  },
+);
