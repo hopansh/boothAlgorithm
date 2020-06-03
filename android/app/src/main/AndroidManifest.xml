@@ -9,6 +9,10 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="boothAlgorithm"
         android:icon="@mipmap/launcher_icon">
+        <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9302800870253054~5146277755"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
