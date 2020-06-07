@@ -19,8 +19,8 @@ class _SolutionState extends State<Solution> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final binqval = decToBin(widget.qval);
-    final binmval = decToBin(widget.mval);
+    final binqval = binary(widget.qval).join('');
+    final binmval = binary(widget.mval).join('');
 
     List<Result> results = mult(widget.qval, widget.mval);
     results.forEach((element) {element.toString();});

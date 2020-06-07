@@ -44,8 +44,18 @@ multiply(int n1, int n2) {
 binary(final int n) {
   var bin = new List(4);
   bin.fillRange(0, 4,0);
-  var binary = n.toSigned( n<0 ? n.bitLength : n.bitLength + 1).toRadixString(2).split('').reversed.toList();
-  binary.asMap().forEach((index,value) => bin[index] = value);
+  if(n < 0){
+    var res =  binary(n.toSigned(n.bitLength));
+    int i = 0;
+    while (i <= (3 -n.bitLength)){
+      res[i] = 1;
+      ++i;
+    }
+    return res;
+  }
+  var binaryNum = n.toRadixString(2).split('').reversed.toList();
+  print(binaryNum);
+  binaryNum.asMap().forEach((index,value) => bin[index] = value);
 
   print("Hi");
   List<int> meh = bin.reversed.toList().map((e) => e == '-' ? 0 : int.parse(e.toString())).toList();
@@ -55,8 +65,8 @@ binary(final int n) {
 
 mult(int a, int b){
 
-  List<int> m = binary(a);
-  List<int> q = binary(b);
+  List<int> m = binary(b);
+  List<int> q = binary(a);
   var m2s = m.map((e) => e == 0? 1 : 0).toList();
   m2s = add(m2s,[0,0,0,1]);
   List operation = List();
@@ -71,20 +81,21 @@ mult(int a, int b){
     print("count = $count");
     var q0 = operation[7];
     var q1 = operation[8]; //means q(-1) but who wants to write long variable names
-    if(q0.toString() == 1.toString() && q1.toString() == 0.toString()){
+    if(q0 == 1 && q1 == 0){
       operation = add(operation,m2s);
       ops = ("Sub");
       print(operation);
     }
-    else if(q0 == 0 && q1 == 1){
-      operation = add(operation,m);
-      ops = ("Add");
-      print(operation);
+    else {
+      if(q0 == 0 && q1 == 1){
+        operation = add(operation,m);
+        ops = ("Add");
+        print(operation);
+      }
+      else{
+        ops = ("No add/sub");
+      }
     }
-    else{
-      ops = ("No add/sub");
-    }
-
     operation.insert(0, operation[0]);
     operation.removeLast();
     print(operation);
@@ -135,18 +146,6 @@ add(List a, List b) {
   }
   return a;
 }
-
-//add(List a,List b){
-//  int carry = 0;
-//  for(int i = 3; i>=0; --i){
-//    a[i] = a[i] + b[i] + carry;
-//    carry = a[i] ~/ 2;
-//    a[i] = a[i] == 2 ? 0 : a[i];
-//    print(a);
-//  }
-//  return a;
-//}
-
 getDecimal(List b) {
   int p = 0;
   int t = 1;
