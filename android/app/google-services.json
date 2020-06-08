@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1067654886984:android:5858907e46e620898f8a7d",
+        "mobilesdk_app_id": "1:1067654886984:android:4e45a4847a4f4e058f8a7d",
         "android_client_info": {
-          "package_name": "com.example.boothAlgorithm"
+          "package_name": "com.acadmigo.booth"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1067654886984-t46mg7stqjh321m00afg7jj5u860jo9t.apps.googleusercontent.com",
+          "client_id": "1067654886984-a9452rounl3vaa5qml9pqgg21krsgttn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.boothAlgorithm",
+            "package_name": "com.acadmigo.booth",
             "certificate_hash": "008fda2635a41d01abcc561f05aa0d188d900576"
           }
         },

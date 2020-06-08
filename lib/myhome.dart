@@ -8,7 +8,7 @@ class MyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    FirebaseAdMob.instance.initialize(appId: "ca-app-pub-9302800870253054/2548034576" ).then((response){
+    FirebaseAdMob.instance.initialize(appId: "ca-app-pub-9302800870253054~6193003212" ).then((response){
        myBanner..load()..show();
        });
 
@@ -146,10 +146,7 @@ MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
 );
 
 BannerAd myBanner = BannerAd(
-  // Replace the testAdUnitId with an ad unit id from the AdMob dash.
-  // https://developers.google.com/admob/android/test-ads
-  // https://developers.google.com/admob/ios/test-ads
-  adUnitId: BannerAd.testAdUnitId,
+  adUnitId: "ca-app-pub-9302800870253054/1036933357",
   size: AdSize.smartBanner,
   targetingInfo: targetingInfo,
   listener: (MobileAdEvent event) {

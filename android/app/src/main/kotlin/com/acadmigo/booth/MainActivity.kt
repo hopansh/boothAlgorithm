@@ -1,4 +1,4 @@
-package com.example.boothAlgorithm
+package com.acadmigo.booth
 
 import io.flutter.embedding.android.FlutterActivity
 
