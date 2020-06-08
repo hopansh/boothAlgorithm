@@ -1,4 +1,3 @@
-import 'package:boothAlgorithm/functions/boothAlgo.dart';
 import 'package:boothAlgorithm/functions/result.dart';
 import 'package:flutter/material.dart';
 class BuildTable extends StatelessWidget {

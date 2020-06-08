@@ -8,7 +8,7 @@ class MyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    FirebaseAdMob.instance.initialize(appId: "ca-app-pub-9302800870253054~5146277755" ).then((response){
+    FirebaseAdMob.instance.initialize(appId: "ca-app-pub-9302800870253054/2548034576" ).then((response){
        myBanner..load()..show();
        });
 

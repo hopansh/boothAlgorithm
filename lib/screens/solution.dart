@@ -1,5 +1,4 @@
 import 'package:boothAlgorithm/functions/boothAlgo.dart';
-import 'package:boothAlgorithm/functions/decToBin.dart';
 import 'package:boothAlgorithm/functions/result.dart';
 import 'package:boothAlgorithm/widgets/buildTable.dart';
 
