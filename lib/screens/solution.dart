@@ -69,6 +69,31 @@ class _SolutionState extends State<Solution> {
                   ],
 
                 )),
+
+              Container(
+      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+      decoration: BoxDecoration(
+          color: Color(0xff262626),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+            bottomLeft: Radius.circular(20),
+            bottomRight: Radius.circular(20),
+          )),
+      child: Table(children:[
+         TableRow(children: 
+      [
+          Text("A",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold),),
+          Text("Q",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold),),
+          Text("Q-1",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold),),
+          Text("M",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold),),
+          Text("Process",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold),),
+          Text("Cycle",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold),),
+      ]
+      ),
+      ])
+  ),
             ListView.builder(
               shrinkWrap: true,
                 itemBuilder: (context,index) => getTable(results[index]),
@@ -83,18 +108,16 @@ class _SolutionState extends State<Solution> {
 
 Widget getTable(Result r){
   return Container(
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+      margin: EdgeInsets.symmetric(vertical: 1, horizontal: 5),
+      padding: EdgeInsets.fromLTRB(15, 10, 5, 10),
       decoration: BoxDecoration(
           color: Color(0xff262626),
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-            bottomLeft: Radius.circular(20),
-            bottomRight: Radius.circular(20),
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+            bottomLeft: Radius.circular(10),
+            bottomRight: Radius.circular(10),
           )),
       child: BuildTable(r)
-
-//     child:Text("table here"),
   );
 }
